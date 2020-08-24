@@ -4,25 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./quiz.css">
+    <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
+    <script defer src="./quiz.js"></script>
     <title>Document</title>
 </head>
 <body>
     <div class="quiz-container">
-        <div id="question-container">
+        <div id="question-container" class="hide">
             <div id="question">Question</div>
             <div id="options" class="options-layout">
-                <button class="button">Option-1</button>
-                <button class="button">Option-2</button>
-                <button class="button">Option-3</button>
-                <button class="button">Option-4</button>
+                <button class="btn">Option-1</button>
+                <button class="btn">Option-2</button>
+                <button class="btn">Option-3</button>
+                <button class="btn">Option-4</button>
             </div>
         </div>
 
         <div id="navigation">
-            <button id="Start">Start</button>
-            <button id="High-Scores">High Scores</button>
-            <button id="Previous">Previous</button>
-            <button id="Next">Next</button>
+            <button id="start" class="start btn">Start</button>
+            <button id="previous" class="previous btn hide">Previous</button>
+            <button id="next" class="next btn hide">Next</button>
         </div>
     </div>
            
