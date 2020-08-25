@@ -1,3 +1,98 @@
-#Start {
-    background-color: blue;
-}
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: 'Alata', sans-serif;
+  }
+  
+  
+
+  body {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: teal;
+  }
+
+  body.correct {
+      background-color: green;
+  }
+
+  body.wrong {
+      background-color: red;
+  }
+
+  .quiz-box {
+      width: 800px;
+      max-width: 80%;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 30px;
+      font-size: 25px;
+      
+  }
+
+  .options-layout {
+      display: grid;
+      grid-template-rows: repeat(4,auto);
+      padding: 20px;
+      grid-gap: 15px;
+      margin: 20px;
+  }
+
+  .navigation {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+  }
+
+  .btn {
+    border-radius: 5px;
+    padding: 15px 10px;
+    background-color: teal;
+    color: whitesmoke;
+    font-size: 20px;
+    border-color: white;
+  }
+
+  .start, .submit, .next, .previous{
+      background-color: rgb(35, 36, 32);
+      padding: 15px 20px;
+      margin-left: 30px;
+      font-size: 20px;
+      color: whitesmoke;
+  }
+ 
+  .status{
+    background-color: blueviolet;
+    margin-left: 30px;
+    padding: 15px 20px;
+  }
+  .btn:hover {
+      border-color: black;
+  }
+
+
+  
+  
+  .btn.correct {
+    background-color: green;
+  }
+  
+  .btn.wrong {
+    background-color: red;
+  }
+
+  .hide {
+    display: none;
+  }
+
+  
+
+
+  
+ 

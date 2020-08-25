@@ -9,8 +9,8 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="quiz-container">
-        <div id="question-container" class="hide">
+    <div class="quiz-box">
+        <div id="question-box" class="hide">
             <div id="question">Question</div>
             <div id="options" class="options-layout">
                 <button class="btn">Option-1</button>
@@ -20,10 +20,43 @@
             </div>
         </div>
 
-        <div id="navigation">
+        <div class="navigation">
             <button id="start" class="start btn">Start</button>
             <button id="previous" class="previous btn hide">Previous</button>
+            <span id="status" class=" status btn hide">Status</span>
             <button id="next" class="next btn hide">Next</button>
+            <button id="submit" class="submit btn hide">Submit</button>
+            
+        </div>
+
+        <div class="result-table">
+            <table>
+               <tr>
+                   <td colspan="2">Quiz Results</td>
+               </tr>
+               <tr>
+                   <td>Total Questions</td>
+                   <td><span id="total-questions">10</span></td>
+               </tr>
+               <tr>
+                   <td>Correct</td>
+                   <td><span id="total-correct">4</span></td>
+               </tr>
+               <tr>
+                   <td>Wrong</td>
+                   <td><span id="total-wrong">6</span></td>
+              </tr>
+              <tr>
+                  <td>Percentage</td>
+                  <td><span id="percentage">40%</span></td>
+              </tr>
+              <tr>
+                  <td>Score</td>
+                  <td><span id="score">40</span></td>
+              </tr>
+            </table>
+            <button id="try-again" class="btn">Try Again</button>
+            <button id="home" class="btn">Home</button>
         </div>
     </div>
            
