@@ -116,9 +116,12 @@ const score = document.getElementById('score');
 const resultTable = document.getElementById('result-table');
 const tryAgainElement = document.getElementById('try-again');
 const homeElement = document.getElementById('home');
+const statusQuestionNumber = document.getElementById('question-number');
+const statusScore = document.getElementById('pts');
 
 let questionNumber;
 let numberOfCorrect=0;
+let statusPoints=0;
 
 startButton.addEventListener('click', startQuiz);
 nextButton.addEventListener('click', () => {
@@ -149,6 +152,8 @@ function resetQuiz() {
   resultTable.classList.add('hide');
   quizBox.classList.remove('hide');
   numberOfCorrect=0;
+  statusPoints=0;
+  statusScore.innerHTML = `${statusPoints}`
   questions.forEach(obj => {
      obj.status= 'not answered';
   })
@@ -168,6 +173,8 @@ function nextQuestion() {
 
 function displayQuestion(question) {
   statusElement.classList.add('hide');
+  statusQuestionNumber.innerHTML = `${questionNumber+1}/${questions.length}`;
+  
   questionObject.innerHTML = question.question;
   question.answer.forEach(answer => {
     const button = document.createElement('button');
@@ -222,10 +229,14 @@ function displayQuestion(question) {
       if(string === 'true')
       {
         numberOfCorrect++;
+        statusPoints +=10;
+        statusScore.innerHTML = `${statusPoints}`;
+
       }
       questions[questionNumber].status = 'answered';
       showColor(document.body,string)
       Array.from(optionButtons.children).forEach(button => {
+        button.disabled=true;
         showColor(button,button.dataset.correct);
         }
       )
@@ -250,7 +261,7 @@ function displayQuestion(question) {
      totalWrong.innerHTML = `${numberOfWrong}`
      let totalPercentage = (numberOfCorrect/questions.length)*100;
      percentage.innerHTML = `${totalPercentage}%`;
-     let totalScore = numberOfCorrect*5;
+     let totalScore = numberOfCorrect*10;
      score.innerHTML = `${totalScore}`;
      quizBox.classList.add('hide');
      resultTable.classList.remove('hide');

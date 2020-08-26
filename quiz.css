@@ -142,4 +142,17 @@
     width: 150px;
   }
 
+  #status-bar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px;
+    border-bottom: 2px solid teal;
+    margin-bottom: 25px;
+  }
+
+  #question-number, #pts
+  {
+    color: rgb(7, 103, 103);
+  }
   
