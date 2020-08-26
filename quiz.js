@@ -99,7 +99,7 @@ const questions = [
       status: 'not answered'
     }
 ];
-
+const quizBox = document.getElementById('quiz-box');
 const startButton = document.getElementById('start');
 const previousButton = document.getElementById('previous');
 const nextButton = document.getElementById('next');
@@ -108,9 +108,17 @@ const questionBox = document.getElementById('question-box');
 const questionObject = document.getElementById('question');
 const optionButtons = document.getElementById('options');
 const statusElement = document.getElementById('status');
-
+const totalQuestions = document.getElementById('total-questions');
+const totalCorrect = document.getElementById('total-correct');
+const totalWrong = document.getElementById('total-wrong');
+const percentage = document.getElementById('percentage');
+const score = document.getElementById('score');
+const resultTable = document.getElementById('result-table');
+const tryAgainElement = document.getElementById('try-again');
+const homeElement = document.getElementById('home');
 
 let questionNumber;
+let numberOfCorrect=0;
 
 startButton.addEventListener('click', startQuiz);
 nextButton.addEventListener('click', () => {
@@ -125,6 +133,26 @@ previousButton.addEventListener('click', () => {
     nextQuestion();
 
 })
+
+submitButton.addEventListener('click', showResult)
+
+tryAgainElement.addEventListener('click', () => {
+  resetQuiz();
+  startQuiz();
+})
+
+homeElement.addEventListener('click', () => {
+  window.location.replace("./quiz.html");
+})
+
+function resetQuiz() {
+  resultTable.classList.add('hide');
+  quizBox.classList.remove('hide');
+  numberOfCorrect=0;
+  questions.forEach(obj => {
+     obj.status= 'not answered';
+  })
+}
 
 function startQuiz() {
     startButton.classList.add('hide');
@@ -153,10 +181,18 @@ function displayQuestion(question) {
   if(question.status === 'answered'){
     button.disabled = true;
     button.style.backgroundColor = 'gray';
-    nextButton.classList.remove('hide');
+    
     if(questionNumber > 0)
     {
     previousButton.classList.remove('hide');
+    }
+
+    if(questionNumber+1 < questions.length)
+    {
+      nextButton.classList.remove('hide');
+    }else
+    {
+      submitButton.classList.remove('hide');
     }
     statusElement.innerHTML = 'Answered';
     statusElement.classList.remove('hide');
@@ -183,6 +219,10 @@ function displayQuestion(question) {
     function checkAnswer(event) {
       const button = event.target;
       const string = button.dataset.correct;
+      if(string === 'true')
+      {
+        numberOfCorrect++;
+      }
       questions[questionNumber].status = 'answered';
       showColor(document.body,string)
       Array.from(optionButtons.children).forEach(button => {
@@ -200,6 +240,20 @@ function displayQuestion(question) {
     
       }
       
+    }
+
+    function showResult() {
+    removeColor(document.body);
+     totalQuestions.innerHTML = `${questions.length}`;
+     totalCorrect.innerHTML =  `${numberOfCorrect}`;
+     let numberOfWrong = questions.length - numberOfCorrect;
+     totalWrong.innerHTML = `${numberOfWrong}`
+     let totalPercentage = (numberOfCorrect/questions.length)*100;
+     percentage.innerHTML = `${totalPercentage}%`;
+     let totalScore = numberOfCorrect*5;
+     score.innerHTML = `${totalScore}`;
+     quizBox.classList.add('hide');
+     resultTable.classList.remove('hide');
     }
 
     function showColor(selected,string) {

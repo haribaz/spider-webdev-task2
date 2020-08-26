@@ -24,7 +24,7 @@
       background-color: red;
   }
 
-  .quiz-box {
+  #quiz-box {
       width: 800px;
       max-width: 80%;
       background-color: white;
@@ -75,8 +75,6 @@
   .btn:hover {
       border-color: black;
   }
-
-
   
   
   .btn.correct {
@@ -91,8 +89,57 @@
     display: none;
   }
 
-  
+  #result-table {
+    padding: 150px;
+    padding-top: 100px;;
+    background-color: white;
+    width: 800px;
+    border-radius: 10px;
+    max-height: 80%;
+    max-width: 80%;
+  }
 
+  table {
+    border: 2px solid teal;
+    margin-bottom: 30px;
+  }
+
+  td {
+    font-size:25px;
+    width: 100px;
+    border: 2px solid teal;
+    width: 300px;
+    text-align: center;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  #heading {
+    font-size: 50px;
+    text-align: center;
+    font-weight: bold;
+    color: teal;
+  }
+
+  .reverse-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #try-again {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 15px;
+    width: 150px;
+  }
+
+  #home {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 30px;
+    width: 150px;
+  }
 
   
- 

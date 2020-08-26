@@ -9,7 +9,7 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="quiz-box">
+    <div id="quiz-box">
         <div id="question-box" class="hide">
             <div id="question">Question</div>
             <div id="options" class="options-layout">
@@ -28,37 +28,40 @@
             <button id="submit" class="submit btn hide">Submit</button>
             
         </div>
-
-        <div class="result-table">
-            <table>
-               <tr>
-                   <td colspan="2">Quiz Results</td>
-               </tr>
-               <tr>
-                   <td>Total Questions</td>
-                   <td><span id="total-questions">10</span></td>
-               </tr>
-               <tr>
-                   <td>Correct</td>
-                   <td><span id="total-correct">4</span></td>
-               </tr>
-               <tr>
-                   <td>Wrong</td>
-                   <td><span id="total-wrong">6</span></td>
-              </tr>
-              <tr>
-                  <td>Percentage</td>
-                  <td><span id="percentage">40%</span></td>
-              </tr>
-              <tr>
-                  <td>Score</td>
-                  <td><span id="score">40</span></td>
-              </tr>
-            </table>
-            <button id="try-again" class="btn">Try Again</button>
-            <button id="home" class="btn">Home</button>
-        </div>
     </div>
+
+    <div id="result-table" class="hide">
+        <table>
+           <tr>
+               <td  id="heading" colspan="2">Quiz Results</td>
+           </tr>
+           <tr>
+               <td>Total Questions</td>
+               <td><span id="total-questions">10</span></td>
+           </tr>
+           <tr>
+               <td>Correct</td>
+               <td><span id="total-correct">4</span></td>
+           </tr>
+           <tr>
+               <td>Wrong</td>
+               <td><span id="total-wrong">6</span></td>
+          </tr>
+          <tr>
+              <td>Percentage</td>
+              <td><span id="percentage">40%</span></td>
+          </tr>
+          <tr>
+              <td>Score</td>
+              <td><span id="score">40</span></td>
+          </tr>
+        </table>
+        <div class="reverse-nav">
+        <button id="try-again" class="btn">Try Again</button>
+        <button id="home" class="btn">Home</button>
+        </div>
+    
+</div>
            
         
 
