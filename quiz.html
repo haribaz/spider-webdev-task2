@@ -32,6 +32,7 @@
         </div>
 
         <div class="navigation">
+            <input type="text" id="user"  placeholder="Username">
             <button id="start" class="start btn">Start</button>
             <button id="previous" class="previous btn hide">Previous</button>
             <span id="status" class=" status btn hide">Status</span>
@@ -47,29 +48,37 @@
                <td  id="heading" colspan="2">Quiz Results</td>
            </tr>
            <tr>
+               <td>Name</td>
+               <td><span id="name-item">Name</span></td>
+           </tr>
+           <tr>
                <td>Total Questions</td>
                <td><span id="total-questions">10</span></td>
            </tr>
-           <tr>
-               <td>Correct</td>
-               <td><span id="total-correct">4</span></td>
-           </tr>
-           <tr>
-               <td>Wrong</td>
-               <td><span id="total-wrong">6</span></td>
-          </tr>
           <tr>
               <td>Percentage</td>
               <td><span id="percentage">40%</span></td>
           </tr>
           <tr>
-              <td>Score</td>
+              <td>Your Score</td>
               <td><span id="score">40</span></td>
           </tr>
+          <tr>
+            <td>Leader's Name</td>
+            <td><span id="high-name">40</span></td>
+        </tr>
+        <tr>
+            <td>Leader's Score</td>
+            <td><span id="high-score">4</span></td>
+        </tr>
+        <tr>
+            <td>Leader's Submission Time</td>
+            <td><span id="high-time">6</span></td>
+       </tr>
         </table>
         <div class="reverse-nav">
         <button id="try-again" class="btn">Try Again</button>
-        <button id="home" class="btn">Home</button>
+        <button id="home" class="btn">Save</button>
         </div>
     
 </div>

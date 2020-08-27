@@ -1,3 +1,4 @@
+//QUESTIONS
 const questions = [
     { question: 'How many countries, areas or territories are suffering from novel coronavirus outbreak in the World?',
       answer: [
@@ -99,6 +100,8 @@ const questions = [
       status: 'not answered'
     }
 ];
+
+//DOM ELEMENTS
 const quizBox = document.getElementById('quiz-box');
 const startButton = document.getElementById('start');
 const previousButton = document.getElementById('previous');
@@ -109,21 +112,41 @@ const questionObject = document.getElementById('question');
 const optionButtons = document.getElementById('options');
 const statusElement = document.getElementById('status');
 const totalQuestions = document.getElementById('total-questions');
-const totalCorrect = document.getElementById('total-correct');
-const totalWrong = document.getElementById('total-wrong');
+const highScore = document.getElementById('high-score');
+const highTime = document.getElementById('high-time');
 const percentage = document.getElementById('percentage');
-const score = document.getElementById('score');
+const scoreElement = document.getElementById('score');
 const resultTable = document.getElementById('result-table');
 const tryAgainElement = document.getElementById('try-again');
-const homeElement = document.getElementById('home');
+const saveElement = document.getElementById('home');
 const statusQuestionNumber = document.getElementById('question-number');
 const statusScore = document.getElementById('pts');
+const nameItemElement = document.getElementById('name-item');
+const userNameElement = document.getElementById('user');
+const highName = document.getElementById('high-name');
 
+//PROGRAM VARIABLES
+let randomQuestions;
+let numberOfTimesAttended;
+let totalScore=0;
+let username;
 let questionNumber;
 let numberOfCorrect=0;
 let statusPoints=0;
+startButton.disabled = true;
+const highScores = JSON.parse(localStorage.getItem('highScores')) || [{
+  name: '-----',
+  score: 0,
+  date: '-----'
+}];
+ 
+//EVENT LISTENERS
+userNameElement.addEventListener('keyup', () => {
+  startButton.disabled = false;
+})
 
 startButton.addEventListener('click', startQuiz);
+
 nextButton.addEventListener('click', () => {
   questionNumber++;
   nextQuestion();
@@ -144,13 +167,25 @@ tryAgainElement.addEventListener('click', () => {
   startQuiz();
 })
 
-homeElement.addEventListener('click', () => {
+saveElement.addEventListener('click', () => {
+
+  const endscore = {
+    score: totalScore,
+    name: userNameElement.value,
+    date: new Date()
+  };
+  highScores.push(endscore);
+  highScores.sort((a,b) => b.score - a.score);
+
+  localStorage.setItem("highScores", JSON.stringify(highScores));
   window.location.replace("./quiz.html");
 })
 
+//RESET PROGRAM VARIABLES FOR TRY AGAIN BUTTON
 function resetQuiz() {
   resultTable.classList.add('hide');
   quizBox.classList.remove('hide');
+  totalScore=0;
   numberOfCorrect=0;
   statusPoints=0;
   statusScore.innerHTML = `${statusPoints}`
@@ -159,18 +194,29 @@ function resetQuiz() {
   })
 }
 
+//FUNCTION TO START QUIZ
 function startQuiz() {
+    getUserName();
     startButton.classList.add('hide');
+    randomQuestions = questions.sort(() => Math.random() - .5)
     questionNumber=0;
     questionBox.classList.remove('hide');
     nextQuestion();
 }
 
-function nextQuestion() {
-   removeOptions();
-   displayQuestion(questions[questionNumber]);
+//FUNCTION TO GET USERNAME
+function getUserName() {
+ username = userNameElement.value;
+ document.getElementById('user').classList.add('hide');
 }
 
+//FUNCTION TO ASSIGN NEXT QUESTION 
+function nextQuestion() {
+   removeOptions();
+   displayQuestion(randomQuestions[questionNumber]);
+}
+
+//FUNCTION TO DISPLAY QUESTION AND OPTIONS
 function displayQuestion(question) {
   statusElement.classList.add('hide');
   statusQuestionNumber.innerHTML = `${questionNumber+1}/${questions.length}`;
@@ -184,7 +230,7 @@ function displayQuestion(question) {
     {
        button.dataset.correct = answer.correct;
     } 
-
+  //CONDITION TO NOT ANSWER A QUESTION MORE THAN ONCE
   if(question.status === 'answered'){
     button.disabled = true;
     button.style.backgroundColor = 'gray';
@@ -210,7 +256,8 @@ function displayQuestion(question) {
          }
        )
     }
-
+    
+    //FUNCTION TO REMOVE OPTIONS AND UPDATE NEW OPTIONS EVERYTIME NEXT OR PREVIOUS BUTTON IS CLICKED
     function removeOptions()
     {
       removeColor(document.body);
@@ -223,6 +270,7 @@ function displayQuestion(question) {
       }
     }
     
+    //FUNCTION TO CHECK THE ANSWER
     function checkAnswer(event) {
       const button = event.target;
       const string = button.dataset.correct;
@@ -253,20 +301,25 @@ function displayQuestion(question) {
       
     }
 
+    //RESULT PAGE FUNCTION
     function showResult() {
     removeColor(document.body);
+     nameItemElement.innerHTML = username;
      totalQuestions.innerHTML = `${questions.length}`;
-     totalCorrect.innerHTML =  `${numberOfCorrect}`;
-     let numberOfWrong = questions.length - numberOfCorrect;
-     totalWrong.innerHTML = `${numberOfWrong}`
+
+     
      let totalPercentage = (numberOfCorrect/questions.length)*100;
      percentage.innerHTML = `${totalPercentage}%`;
-     let totalScore = numberOfCorrect*10;
-     score.innerHTML = `${totalScore}`;
+     totalScore = numberOfCorrect*10;
+     scoreElement.innerHTML = `${totalScore}`;
+     highName.innerHTML = `${highScores[0].name}`;
+     highScore.innerHTML = `${highScores[0].score}`;
+     highTime.innerHTML = `${highScores[0].date}`;
      quizBox.classList.add('hide');
      resultTable.classList.remove('hide');
     }
-
+    
+    //FUNCTION TO ASSIGN COLOUR BASED ON THE ANSWER
     function showColor(selected,string) {
       removeColor(selected);
       if (string) {
@@ -277,8 +330,10 @@ function displayQuestion(question) {
       
     }
 
+    //FUNCTION TO REMOVE COLOUR AFTER EVERY QUESTION
     function removeColor(selected)
     {
       selected.classList.remove('correct');
       selected.classList.remove('wrong');
     }
+
