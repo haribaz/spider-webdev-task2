@@ -124,6 +124,17 @@ const statusScore = document.getElementById('pts');
 const nameItemElement = document.getElementById('name-item');
 const userNameElement = document.getElementById('user');
 const highName = document.getElementById('high-name');
+const timer = document.getElementById('timer');
+const sideButtons = document.getElementsByClassName('li-btn');
+const sidebar = document.getElementById('sidebar');
+
+for(let i=0;i < questions.length;i++)
+{
+  sideButtons[i].addEventListener('click', () => {
+    questionNumber=i;
+    nextQuestion()
+  })
+}
 
 //PROGRAM VARIABLES
 let randomQuestions;
@@ -133,7 +144,12 @@ let username;
 let questionNumber;
 let numberOfCorrect=0;
 let statusPoints=0;
+const totalTime = 3;
+let totalTimeinSeconds= totalTime * 60;
 startButton.disabled = true;
+
+
+//LOCAL STORAGE ELEMENT
 const highScores = JSON.parse(localStorage.getItem('highScores')) || [{
   name: '-----',
   score: 0,
@@ -146,6 +162,10 @@ userNameElement.addEventListener('keyup', () => {
 })
 
 startButton.addEventListener('click', startQuiz);
+
+startButton.addEventListener('click', () => {
+  setInterval(changeTimer, 1000);
+} )
 
 nextButton.addEventListener('click', () => {
   questionNumber++;
@@ -163,6 +183,7 @@ previousButton.addEventListener('click', () => {
 submitButton.addEventListener('click', showResult)
 
 tryAgainElement.addEventListener('click', () => {
+  
   resetQuiz();
   startQuiz();
 })
@@ -180,14 +201,49 @@ saveElement.addEventListener('click', () => {
   localStorage.setItem("highScores", JSON.stringify(highScores));
   window.location.replace("./quiz.html");
 })
+ 
+//FUNCTIONS
+
+function openSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+}
+
+//TIMER FUNCTION
+function changeTimer() {
+  let minutes = Math.floor(totalTimeinSeconds/60);
+  let seconds = totalTimeinSeconds%60;
+
+  seconds = seconds < 10 ? '0' + seconds : seconds;
+
+  timer.innerHTML = `${minutes}:${seconds}`;
+  if(minutes < 1 && seconds < 30)
+  {
+    timer.style.backgroundColor = 'red';
+  }
+
+  if( minutes === 0 && seconds === '00')
+  {
+    showResult();
+    quizBox.classList.add('hide');
+    resultTable.classList.remove('hide');
+    return
+  }
+  totalTimeinSeconds--;
+}
 
 //RESET PROGRAM VARIABLES FOR TRY AGAIN BUTTON
 function resetQuiz() {
+  for(i=0;i<questions.length;i++)
+  {
+    sideButtons[i].style.backgroundColor = 'teal';
+  }
+  timer.style.backgroundColor = 'teal';
   resultTable.classList.add('hide');
   quizBox.classList.remove('hide');
   totalScore=0;
   numberOfCorrect=0;
   statusPoints=0;
+  totalTimeinSeconds= totalTime * 60;
   statusScore.innerHTML = `${statusPoints}`
   questions.forEach(obj => {
      obj.status= 'not answered';
@@ -197,6 +253,7 @@ function resetQuiz() {
 //FUNCTION TO START QUIZ
 function startQuiz() {
     getUserName();
+    sidebar.classList.remove('hide');
     startButton.classList.add('hide');
     randomQuestions = questions.sort(() => Math.random() - .5)
     questionNumber=0;
@@ -272,6 +329,7 @@ function displayQuestion(question) {
     
     //FUNCTION TO CHECK THE ANSWER
     function checkAnswer(event) {
+      sideButtons[questionNumber].style.backgroundColor = 'blueviolet';
       const button = event.target;
       const string = button.dataset.correct;
       if(string === 'true')
@@ -279,13 +337,12 @@ function displayQuestion(question) {
         numberOfCorrect++;
         statusPoints +=10;
         statusScore.innerHTML = `${statusPoints}`;
-
       }
       questions[questionNumber].status = 'answered';
       showColor(document.body,string)
+      showColor(button,string);
       Array.from(optionButtons.children).forEach(button => {
         button.disabled=true;
-        showColor(button,button.dataset.correct);
         }
       )
       if(questionNumber === 0){
@@ -306,8 +363,6 @@ function displayQuestion(question) {
     removeColor(document.body);
      nameItemElement.innerHTML = username;
      totalQuestions.innerHTML = `${questions.length}`;
-
-     
      let totalPercentage = (numberOfCorrect/questions.length)*100;
      percentage.innerHTML = `${totalPercentage}%`;
      totalScore = numberOfCorrect*10;
@@ -317,6 +372,7 @@ function displayQuestion(question) {
      highTime.innerHTML = `${highScores[0].date}`;
      quizBox.classList.add('hide');
      resultTable.classList.remove('hide');
+     sidebar.classList.add('hide');
     }
     
     //FUNCTION TO ASSIGN COLOUR BASED ON THE ANSWER

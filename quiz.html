@@ -9,6 +9,26 @@
     <title>Document</title>
 </head>
 <body>
+    <div id='sidebar' class='hide'>
+        <div class='access-btn' onclick="openSidebar()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul>
+            <li><btn class="li-btn">1</btn></li>
+            <li><btn class="li-btn">2</btn></li>
+            <li><btn class="li-btn">3</btn></li>
+            <li><btn class="li-btn">4</btn></li>
+            <li><btn class="li-btn">5</btn></li>
+            <li><btn class="li-btn">6</btn></li>
+            <li><btn class="li-btn">7</btn></li>
+            <li><btn class="li-btn">8</btn></li>
+            <li><btn class="li-btn">9</btn></li>
+            <li><btn class="li-btn">10</btn></li>
+        </ul>
+
+    </div>
     <div id="quiz-box">
         <div id="question-box" class="hide">
             <div id="status-bar">
@@ -16,12 +36,13 @@
                    <span>Question: </span>
                    <span id="question-number">2</span>
                 </div>
+                <p id="timer"></p>
                 <div id="status-points-box">
                     <span>Points: </span>
                     <span id="pts">0</span>
-                </div>
-                
+                </div>  
             </div>
+         
             <div id="question">Question</div>
             <div id="options" class="options-layout">
                 <button class="btn">Option-1</button>

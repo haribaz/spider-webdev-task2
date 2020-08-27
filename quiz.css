@@ -18,10 +18,12 @@
 
   body.correct {
       background-color: green;
+      transition: all 500ms ease-in-out;
   }
 
   body.wrong {
       background-color: red;
+      transition: all 500ms ease-in-out;
   }
 
   #quiz-box {
@@ -79,10 +81,12 @@
   
   .btn.correct {
     background-color: green;
+    transition: all 500ms ease-in-out;
   }
   
   .btn.wrong {
     background-color: red;
+    transition: all 500ms ease-in-out;
   }
 
   .hide {
@@ -147,7 +151,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 25px;
+    padding: 15px;
     border-bottom: 2px solid teal;
     margin-bottom: 25px;
   }
@@ -163,4 +167,61 @@
     font-size: 20px;
     border: 2px solid black;
     border-radius: 5px;
+  }
+
+  #timer {
+    background-color: teal;
+    color: white;
+    padding: 10px;
+    font-size: 25px;
+    border-radius: 10px;
+    width: 100px;
+    text-align: center;
+  }
+
+  #sidebar {
+    position: fixed;
+    top: 0px;
+    left: -250px;
+    background-color: white;
+    width: 250px;
+    height: 100%;
+    box-shadow: 0 0 20px;
+    transition: all 500ms ease-out;
+  }
+
+  #sidebar.open {
+    left: 0px;
+  }
+
+  #sidebar ul li {
+    list-style: none;
+    padding: 30px 30px;
+  }
+
+  .li-btn {
+    background-color: teal;
+    padding: 20px 50px;
+    text-align: center;
+    color: white;
+    border-radius: 10px;
+  }
+
+  .li-btn:hover {
+    color: black ;
+  }
+
+  #sidebar .access-btn {
+    position: absolute;
+    left: 280px;
+    top: 20px;
+  }
+
+  #sidebar .access-btn span {
+    display: block;
+    width: 30px;
+    height: 5px;
+    background-color: white;
+    margin: 3px 0px;
+    border-radius: 10px;
   }
