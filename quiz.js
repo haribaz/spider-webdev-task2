@@ -116,7 +116,7 @@ const highScore = document.getElementById('high-score');
 const highTime = document.getElementById('high-time');
 const percentage = document.getElementById('percentage');
 const scoreElement = document.getElementById('score');
-const resultTable = document.getElementById('result-table');
+const resultTable = document.getElementById('result-container');
 const tryAgainElement = document.getElementById('try-again');
 const saveElement = document.getElementById('home');
 const statusQuestionNumber = document.getElementById('question-number');
@@ -393,4 +393,6 @@ function displayQuestion(question) {
       selected.classList.remove('correct');
       selected.classList.remove('wrong');
     }
+
+
 
