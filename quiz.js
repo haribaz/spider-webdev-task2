@@ -153,7 +153,7 @@ startButton.disabled = true;
 const highScores = JSON.parse(localStorage.getItem('highScores')) || [{
   name: '-----',
   score: 0,
-  date: '-----'
+  d1: '-----'
 }];
  
 //EVENT LISTENERS
@@ -161,11 +161,11 @@ userNameElement.addEventListener('keyup', () => {
   startButton.disabled = false;
 })
 
-startButton.addEventListener('click', startQuiz);
-
 startButton.addEventListener('click', () => {
+  startQuiz();
   setInterval(changeTimer, 1000);
-} )
+});
+
 
 nextButton.addEventListener('click', () => {
   questionNumber++;
@@ -193,7 +193,7 @@ saveElement.addEventListener('click', () => {
   const endscore = {
     score: totalScore,
     name: userNameElement.value,
-    date: new Date()
+    d1: new Date()
   };
   highScores.push(endscore);
   highScores.sort((a,b) => b.score - a.score);
@@ -369,7 +369,8 @@ function displayQuestion(question) {
      scoreElement.innerHTML = `${totalScore}`;
      highName.innerHTML = `${highScores[0].name}`;
      highScore.innerHTML = `${highScores[0].score}`;
-     highTime.innerHTML = `${highScores[0].date}`;
+     let d2 = new Date(highScores[0].d1);
+     highTime.innerHTML = d2;
      quizBox.classList.add('hide');
      resultTable.classList.remove('hide');
      sidebar.classList.add('hide');

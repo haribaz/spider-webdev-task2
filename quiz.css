@@ -99,12 +99,12 @@
     background-color: white;
     width: 800px;
     border-radius: 10px;
-    max-height: 90%;
+    max-height: 95%;
     max-width: 80%;
   }
 
   table {
-    margin-top: -20px;
+    margin-top: -40px;
     border: 2px solid teal;
     margin-bottom: 25px;
   }
