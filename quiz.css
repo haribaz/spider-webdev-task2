@@ -93,9 +93,15 @@
     display: none;
   }
 
+  #result-container {
+     width: 800px;  }
+
   #result-table {
-    padding: 150px;
-    padding-top: 100px;;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 50px;
     background-color: white;
     width: 800px;
     border-radius: 10px;
@@ -104,7 +110,6 @@
   }
 
   table {
-    margin-top: -40px;
     border: 2px solid teal;
     margin-bottom: 25px;
   }
@@ -182,9 +187,9 @@
   #sidebar {
     position: fixed;
     top: 0px;
-    left: -250px;
+    left: -180px;
     background-color: white;
-    width: 250px;
+    width: 180px;
     height: 100%;
     box-shadow: 0 0 20px;
     transition: all 500ms ease-out;
@@ -194,14 +199,17 @@
     left: 0px;
   }
 
-  #sidebar ul li {
-    list-style: none;
-    padding: 30px 30px;
+  .flex-options {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
   }
 
   .li-btn {
     background-color: teal;
-    padding: 20px 50px;
+    padding: 10px 30px;
     text-align: center;
     color: white;
     border-radius: 10px;
@@ -213,7 +221,7 @@
 
   #sidebar .access-btn {
     position: absolute;
-    left: 280px;
+    left: 210px;
     top: 20px;
   }
 
