@@ -94,6 +94,7 @@
   }
 
   #result-container {
+      margin-left: 150px;
      width: 800px;  }
 
   #result-table {
